@@ -58,7 +58,6 @@ document.getElementById('container').addEventListener('mousedown', function (e) 
         console.log('maxHeight:', maxHeight, 'falling:', falling)
 
     }
-    //added comment
 });
 
 console.log('Linked!')
