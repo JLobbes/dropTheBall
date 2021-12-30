@@ -33,7 +33,6 @@ document.getElementById('container').addEventListener('mousedown', function (e) 
         initPeak *= 0.8;
         peaks.push(initPeak.toFixed(2));
     }
-    console.log('peaks:', peaks)
 
     //Find corresponding fall time | Gravity = 4;
     let fallTimes = []
@@ -52,11 +51,11 @@ document.getElementById('container').addEventListener('mousedown', function (e) 
 
     let cycle = 0;
     let peakHeight = adjustedPeaks[0];  
-    let currentFallDst = 0;
     let fallTime = fallTimes[cycle];
+    let currentHeight = 0;
+    let currentFallDst = 0;
     let currentTime = 0;
     let falling = true;
-    let currentHeight = 0;
 
     function animation() {
 
@@ -89,6 +88,7 @@ document.getElementById('container').addEventListener('mousedown', function (e) 
             if(currentTime <= 0) {
                 falling = true;
                 ball.style.top = `${peakHeight}px`;
+                
             } else {
                 ball.style.top = `${currentHeight}px`;
             }
