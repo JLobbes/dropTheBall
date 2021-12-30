@@ -12,10 +12,11 @@
 #ball {
     position: relative;
     background-color: rgb(189, 90, 167);
+    border: 3px solid black;
     border-radius: 50%;
     width: 25px;
     height: 25px;
-    border: 3px solid black;
+    top: 472px;
 }
 
 p {
