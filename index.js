@@ -11,52 +11,47 @@ document.getElementById('container').addEventListener('mousedown', function (e) 
     const y = e.clientY - rect.top;
 
     //Display coordinates
-    let coordiantes = document.createTextNode(`X: ${x}, Y: ${506 - y}`)
+    let coordiantes = document.createTextNode(`X: ${x}, Y: ${y}`)
     let display = document.getElementsByTagName('p')[0];
     let x_yPlaceHolder = display.firstChild;
     display.replaceChild(coordiantes, x_yPlaceHolder);
 
     //Relocate Ball
     let ball = document.getElementById('ball');
-    ball.style.top = `${y - 31}px`;    
-    ball.style.left = `${x - 15.5}px`;    
+    ball.style.top = `${y}px`;    
+    ball.style.left = `${x}px`;    
     
     //Drop Ball
     setInterval(drop, 40);
+    let time = 0;
+    let distFallen = 0;
+    let dropping = true;
     let maxHeight = y;
-    let height = y;
-    let velocity = 1;
-    let speed = 0;
-    let falling = true;
     
     function drop() {
-        if(falling === true) {
-            height += speed;
-            speed += velocity;
-            if(height >= (506)) {
-                falling = false;
-                maxHeight *= 1.15;
-                speed;
-                height = 506;
+        
+        if(dropping === true) {
+            time++;
+            distFallen = 0.5 * (4) * (time * time);
+            if(y + distFallen >= 506) {
+                ball.style.top = `${506}px`;
+                dropping = false;
+            } else {
+                ball.style.top = `${y + distFallen}px`;
             }
         }
-        
-        ball.style.top = `${height - 31}px`;
-        
-        if(falling === false) {
-            height -= speed;
-            speed -= velocity;
-            if(height <= maxHeight) {
-                falling = true;
-                speed = 0;
-            }
-        }
-        
-        ball.style.top = `${height - 31}px`;
-        
-        console.log('height:', height, 'speed:', speed)
-        console.log('maxHeight:', maxHeight, 'falling:', falling)
 
+        if(dropping === false) {
+            time--;
+            distFallen = 0.5 * (-4) * (time * time);
+            if(y - distFallen <= maxHeight) {
+                ball.style.top = `${maxHeight}px`;
+                dropping = true;
+            } else {
+                ball.style.top = `${y - distFallen}px`;
+            }
+        }
+        console.log(time);
     }
 });
 
