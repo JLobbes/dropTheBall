@@ -22,37 +22,24 @@ document.getElementById('container').addEventListener('mousedown', function (e) 
     ball.style.left = `${x}px`;    
     
     //Drop Ball
-    setInterval(drop, 40);
-    let time = 0;
-    let distFallen = 0;
-    let dropping = true;
-    let maxHeight = y;
-    
-    function drop() {
-        
-        if(dropping === true) {
-            time++;
-            distFallen = 0.5 * (4) * (time * time);
-            if(y + distFallen >= 506) {
-                ball.style.top = `${506}px`;
-                dropping = false;
-            } else {
-                ball.style.top = `${y + distFallen}px`;
-            }
-        }
+    let peaks = [];
 
-        if(dropping === false) {
-            time--;
-            distFallen = 0.5 * (-4) * (time * time);
-            if(y - distFallen <= maxHeight) {
-                ball.style.top = `${maxHeight}px`;
-                dropping = true;
-            } else {
-                ball.style.top = `${y - distFallen}px`;
+    function findPeaks() {
+        let peak = 475 - y;
+        peaks.push(peak);
+
+        const id = setInterval(populate, 200);
+        function populate() {
+            peak *= 0.8;
+            peaks.push(peak.toFixed(2));
+            if(peaks.length > 15) {
+                clearInterval(id);
+                const adjusted = peaks.filter(a => a > 31);
             }
         }
-        console.log(time);
     }
+
+    findPeaks();
 });
 
 console.log('Linked!')
