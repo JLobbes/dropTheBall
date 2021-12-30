@@ -1,5 +1,5 @@
 # dropTheBall
-Drop a ball anywhere within a square HTML element with in-game physics.
+Click to drop a ball anywhere within a square HTML element with in-game physics.
 
 Started: 2021Dec28
 
